@@ -14,7 +14,7 @@ function ProductScreen() {
       const { data } = await axios.get(
         `http://127.0.0.1:8000/api/products/${id}`
       );
-      setProduct(...data);
+      setProduct(data);
     }
 
     fetchProduct();
@@ -68,8 +68,7 @@ function ProductScreen() {
                   disabled={product.countInStock < 1}
                   type="button"
                 >
-                  {" "}
-                  Add To Cart{" "}
+                  Add To Cart
                 </Button>
               </ListGroup.Item>
             </ListGroup>
