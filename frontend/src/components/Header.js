@@ -1,8 +1,19 @@
 import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { logout } from "../actions/UserActions";
 
 function Header() {
+  const userLogin = useSelector((state) => state.UserLogin);
+  const { error, loading, userInfo } = userLogin;
+
+  const dispatch = useDispatch()
+
+  const LogoutHandler = () => {
+    dispatch(logout())
+  }
+
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
@@ -12,31 +23,33 @@ function Header() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <LinkContainer to="/cart/">
+              <LinkContainer to="/cart/:id">
                 <Nav.Link>
                   <i className="fas fa-shopping-cart"></i>Cart
                 </Nav.Link>
               </LinkContainer>
+              {!userInfo ? (
+                <LinkContainer to="/login">
+                  <Nav.Link>
+                    <i className="fas fa-user"></i>Login
+                  </Nav.Link>
+                </LinkContainer>
+              ) : (
+                <NavDropdown title={userInfo.name} id="username">
+                  <NavDropdown.Item>Profile</NavDropdown.Item>
 
-              <LinkContainer to="/login">
-                <Nav.Link>
-                  <i className="fas fa-user"></i>Login
-                </Nav.Link>
-              </LinkContainer>
+                  <NavDropdown.Item onClick={LogoutHandler}>Logout</NavDropdown.Item>
+                </NavDropdown>
+              )}
+              {/* {userInfo.isAdmin && (
+                <NavDropdown title="Admin" id="adminmenu">
+                  <NavDropdown.Item>Users</NavDropdown.Item>
 
-              {/* <NavDropdown title="Dropdown" id="username">
-                <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <NavDropdown.Item>Products</NavDropdown.Item>
 
-                <NavDropdown.Item>Logout</NavDropdown.Item>
-              </NavDropdown>
-
-                <NavDropdown title="Admin" id="adminmenue">
-                    <NavDropdown.Item>Users</NavDropdown.Item>
-
-                    <NavDropdown.Item>Products</NavDropdown.Item>
-
-                    <NavDropdown.Item>Orders</NavDropdown.Item>
-                </NavDropdown> */}
+                  <NavDropdown.Item>Orders</NavDropdown.Item>
+                </NavDropdown>
+              )} */}
             </Nav>
           </Navbar.Collapse>
         </Container>
