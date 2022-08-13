@@ -1,7 +1,10 @@
 # Ecommerce Shop
  An ecommerce shop built with React js and Django
- ![proshop_django_demo](https://user-images.githubusercontent.com/76729273/18450![proshop](https://user-images.githubusercontent.com/76729273/184502394-8de4f570-f5fd-4e88-9091-fe39885112a9.png)
-2371-cd9e985e-d482-4eab-90aa-789beec57d33.png)
+![proshop_django_demo](https://user-images.githubusercontent.com/76729273/184502458-220bd24c-ca83-4517-b736-0f80c63061fe.png)
+
+![proshop](https://user-images.githubusercontent.com/76729273/184502474-ce3b9451-68db-4d65-9950-3cceb1d39ff5.png)
+[JavaScript-master.zip](https://github.com/favour626/E-Commerce/files/9331808/JavaScript-master.zip)
+
 
 #Features
 Full featured shopping cart
