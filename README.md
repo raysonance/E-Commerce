@@ -20,7 +20,7 @@ Checkout process (shipping, payment method, etc) <br>
 PayPal / credit card integration <br>
 
 # Download & Setup Instructions
-1 - Clone project: git clone https://github.com/divanov11/proshop_django/ <br>
+1 - Clone project: git clone https://github.com/favour626/E-Commerce/ <br>
 2 - cd proshop_django <br>
 3 - Create virtual environment: virtualenv myenv <br>
 4 - myenv\scripts\activate <br>
