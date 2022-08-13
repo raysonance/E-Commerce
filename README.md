@@ -28,5 +28,5 @@ PayPal / credit card integration
 6 - python manage.py runserver
 
 # Install react modules
-1 - cd frontend
-2 - npm install
+-1 - cd frontend
+2. - npm install
