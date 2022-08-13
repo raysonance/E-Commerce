@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { logout } from "../actions/UserActions";
 
 function Header() {
@@ -31,14 +32,20 @@ function Header() {
               {!userInfo ? (
                 <LinkContainer to="/login">
                   <Nav.Link>
-                    <i className="fas fa-user"></i>Login
+                    <i className="fas fa-user"></i> Login
                   </Nav.Link>
                 </LinkContainer>
               ) : (
                 <NavDropdown title={userInfo.name} id="username">
-                  <NavDropdown.Item>Profile</NavDropdown.Item>
+                  <LinkContainer to="/profile">
+                    <NavDropdown.Item>
+                      <i className="fas fa-user"></i> Profile
+                    </NavDropdown.Item>
+                  </LinkContainer>
 
-                  <NavDropdown.Item onClick={LogoutHandler}>Logout</NavDropdown.Item>
+                  <NavDropdown.Item onClick={LogoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
                 </NavDropdown>
               )}
               {/* {userInfo.isAdmin && (

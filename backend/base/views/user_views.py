@@ -27,7 +27,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated, IsAdminUser])
+@permission_classes([IsAuthenticated])
 def getUserProfile(request):
     user = request.user
     serializer = UserSerializer(user, many=False)
@@ -52,6 +52,26 @@ def createUser(request):
             email=data['email'],
             password=make_password(data['password'])
         )
+        serializer = UserSerializerWithToken(user, many=False)
+        return Response(serializer.data)
+    except:
+        message = {'detail': 'User with this email already exists'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def updateUser(request):
+    data = request.data['id']
+    print(data)
+
+    try:
+        user = User.objects.get(id=data['id'])
+        user.first_name=data['name'],
+        user.username=data['email'],
+        user.email=data['email'],
+        user.save()
+        print('not bad data')
         serializer = UserSerializerWithToken(user, many=False)
         return Response(serializer.data)
     except:
