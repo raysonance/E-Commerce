@@ -38,7 +38,12 @@ export const login = (email, password) => async (dispatch) => {
       payload: data,
     });
 
+    dispatch(
+      detail('profile')
+    );
+
     localStorage.setItem("user", JSON.stringify(data));
+
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
