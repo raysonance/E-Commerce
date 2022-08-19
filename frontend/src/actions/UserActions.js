@@ -132,7 +132,7 @@ export const detail = (id) => async (dispatch, getState) => {
   }
 };
 
-export const updateUserProfile = (id, name, email, password) => async (dispatch, getState) => {
+export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_UPDATE_REQUEST,
@@ -142,10 +142,6 @@ export const updateUserProfile = (id, name, email, password) => async (dispatch,
       UserLogin: { userInfo },
     } = getState();
 
-
-    console.log(id, name, email, password)
-
-
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -153,10 +149,9 @@ export const updateUserProfile = (id, name, email, password) => async (dispatch,
       },
     };
 
-    const { data } = await axios.post(
+    const { data } = await axios.put(
       `http://127.0.0.1:8000/api/users/update/`,
-
-      { name: name, email: email, password: password, id: id },
+      user,
       config
     );
 
@@ -171,6 +166,8 @@ export const updateUserProfile = (id, name, email, password) => async (dispatch,
     });
 
     localStorage.setItem("user", JSON.stringify(data));
+
+
 
   } catch (error) {
     dispatch({

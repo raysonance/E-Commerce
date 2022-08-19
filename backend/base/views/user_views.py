@@ -59,21 +59,27 @@ def createUser(request):
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
     
 
-@api_view(['POST'])
+@api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def updateUser(request):
-    data = request.data['id']
+    user = request.user
+    serializer = UserSerializerWithToken(user, many=False)
+    
+    data = request.data
+    
     print(data)
 
     try:
-        user = User.objects.get(id=data['id'])
-        user.first_name=data['name'],
-        user.username=data['email'],
-        user.email=data['email'],
+        user.first_name=data['name']
+        user.username=data['email']
+        user.email=data['email']
+        
+        if data['password'] != '':
+            user.password = make_password(data['password'])
+            
         user.save()
-        print('not bad data')
-        serializer = UserSerializerWithToken(user, many=False)
+        
         return Response(serializer.data)
     except:
-        message = {'detail': 'User with this email already exists'}
+        message = {'detail': 'bad request'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)

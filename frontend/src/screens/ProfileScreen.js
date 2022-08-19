@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { detail, updateUserProfile } from "../actions/UserActions";
+import { USER_UPDATE_STATE_RESET } from "../constants/userConstants";
 // import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 // import { listMyOrders } from "../actions/orderActions";
 
@@ -19,7 +20,7 @@ function ProfileScreen({ history }) {
   const dispatch = useDispatch();
 
   const userDetails = useSelector((state) => state.UserProfile);
-    
+
   const { error, loading, user } = userDetails;
 
   const userLogin = useSelector((state) => state.UserLogin);
@@ -28,16 +29,16 @@ function ProfileScreen({ history }) {
   const UserUpdate = useSelector((state) => state.UserUpdate);
   const { success } = UserUpdate;
 
-//   const orderListMy = useSelector((state) => state.orderListMy);
-//   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
-  const navigate = useNavigate()
-  
+  //   const orderListMy = useSelector((state) => state.orderListMy);
+  //   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
     } else {
-      if (!user || !user.name || success || userInfo._id !== user._id) {
-        // dispatch({ type: USER_UPDATE_PROFILE_RESET });
+      if (!user || !user.name || success ) {
+        dispatch({ type: USER_UPDATE_STATE_RESET });
         dispatch(detail("profile"));
         // dispatch(listMyOrders());
       } else {
@@ -55,12 +56,12 @@ function ProfileScreen({ history }) {
     } else {
       dispatch(
         updateUserProfile({
-          id: user.id,
-          name: name,
-          email: email,
-          password: password,
+          'id': user._id,
+          'name': name,
+          'email': email,
+          'password': password,
         })
-      );
+      )
       setMessage("");
     }
   };
@@ -84,7 +85,7 @@ function ProfileScreen({ history }) {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="email">
+          <Form.Group controlId="email" className="my-3">
             <Form.Label>Email Address</Form.Label>
             <Form.Control
               required
@@ -105,7 +106,7 @@ function ProfileScreen({ history }) {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="passwordConfirm">
+          <Form.Group controlId="passwordConfirm" className="my-3">
             <Form.Label>Confirm Password</Form.Label>
             <Form.Control
               type="password"
@@ -115,7 +116,7 @@ function ProfileScreen({ history }) {
             ></Form.Control>
           </Form.Group>
 
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" className="my-3">
             Update
           </Button>
         </Form>

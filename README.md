@@ -1,5 +1,6 @@
 # Ecommerce Shop
  An ecommerce shop built with React js and Django
+<<<<<<< HEAD
  
  
  ![proshop_django_demo](https://user-images.githubusercontent.com/76729273/184502561-867211e4-4a87-42db-a1dc-950a97bcb163.png)
@@ -30,3 +31,5 @@ PayPal / credit card integration
 # Install react modules
 -1 - cd frontend
 -2. - npm install
+=======
+>>>>>>> parent of 8849d18 (Update README.md)
