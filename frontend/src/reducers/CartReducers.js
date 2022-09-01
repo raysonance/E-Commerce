@@ -1,6 +1,6 @@
 import { CART_ADD_ITEMS, CART_REMOVE_ITEMS } from "../constants/CartConstants";
 
-export const CartReducers = (state = { cartItems: [] }, action) => {
+export const CartReducers = (state = { cartItems: [], shippingAddress: {}}, action) => {
   switch (action.type) {
     case CART_ADD_ITEMS:
       const item = action.payload;
